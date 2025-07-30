@@ -113,3 +113,24 @@ Solutions:
 Use interface to type `project`.
 Add loading.tsx or Suspense for fallback.
 Use a try/catch in the fetch.
+
+# GLOBAL REVIEWS
+
+## 1. Configuration & Environment Management
+hardcoded URLs and parameters everywhere
+Impossible to deploy in different environments
+## 2. Type Safety & Data Consistency
+Absence of shared types between front/back
+Risk of inconsistencies in API contracts
+## 3. Error Handling Strategy
+Chaotic error handling from both sides
+No standardized format for errors
+## 4. Performance & Scalability Concerns
+No consideration for the 20,000 projects
+No pagination, caching, or optimizations
+## 5. Security Vulnerabilities
+Non-existent input validation
+No rate limiting
+## 6. Monitoring & Observability Gap
+No logging or monitoring
+Impossible to debug in production
