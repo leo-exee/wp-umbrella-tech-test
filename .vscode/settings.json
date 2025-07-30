@@ -1,4 +1,8 @@
 {
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**:Zone.Identifier": true,
+    "**/app/**:Zone.Identifier": true
+  }
 }

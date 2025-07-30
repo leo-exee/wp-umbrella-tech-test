@@ -8,7 +8,7 @@ export function start() {
         removeOnComplete: true,
         removeOnFail: true,
       },
-      connection: getRedisConnection(),
+      connection: getRedisConnection(), // Redis hardcoded in getRedisConnection.ts
     });
 
     queue.add(
@@ -17,7 +17,7 @@ export function start() {
         frequency: 1,
       },
       {
-        repeat: { pattern: "*/20 * * * * *" },
+        repeat: { pattern: "*/20 * * * * *" }, // Ping every 20s instead of the expected 2 minutes
       }
     );
   } catch (error) {
@@ -29,11 +29,11 @@ export function start() {
       "pings",
       async (job) => {
         try {
-          const response = await fetch("http://localhost:3000/api/projects");
+          const response = await fetch("http://localhost:3000/api/projects"); // URL hardcoded, not using .env and config.ts
           const data = await response.json();
 
           for (const project of data) {
-            const response = await fetch(project.url);
+            const response = await fetch(project.url); // Sequential calls, risk of overload for 20k projects
 
             if (response.status === 200) {
               // =====
@@ -42,6 +42,8 @@ export function start() {
               // =====
             }
           }
+
+          // Use Promise.allSettled() + batch processing (e.g., by 100)
         } catch (error) {
           // =====
           // No need to review this part
